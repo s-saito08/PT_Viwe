@@ -4,52 +4,44 @@
   <meta charset="UTF-8" />
   <title>Video Intro</title>
   <style>
-    /* ページ全体の余白やスクロールをなくす */
+    /* ページ全体の設定 */
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden; /* 動画が画面を埋めるため */
+      overflow: hidden; /* スクロールバーを非表示にする */
     }
 
-    /* 動画を画面いっぱいに表示し、アスペクト比を崩さずに拡大 */
+    /* 動画のスタイル: 高さ優先で表示 */
     #intro-video {
-      position: absolute; /* 親要素に対して絶対位置 */
+      position: absolute; /* 画面全体に固定配置 */
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* 縦横比を維持しつつ親要素を埋める */
-      z-index: 1; /* ボタンなどより背面にするため */
+      left: 50%; /* 動画を中央揃え */
+      transform: translateX(-50%); /* 水平中央揃え調整 */
+      width: auto; /* 幅は自動調整 */
+      height: 100%; /* 高さを100%に固定 */
+      object-fit: contain; /* 縦横比を維持しながら、高さ優先で表示 */
+      background-color: black; /* 動画外側の余白部分を黒に設定 */
+      z-index: 1; /* ボタンより背面 */
     }
 
-    /* スキップボタンを右下に固定 */
+    /* スキップボタン */
     #skip-button {
       position: absolute;
       bottom: 20px;
       right: 20px;
-      z-index: 2; /* 動画より前面に表示するため */
+      z-index: 2; /* 動画より前面 */
       padding: 10px 20px;
       cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.6); /* 半透明の背景（お好みで） */
+      background-color: rgba(0, 0, 0, 0.6); /* 半透明の背景 */
       color: #fff;
       border: none;
       border-radius: 4px;
     }
+
     #skip-button:hover {
       background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /*
-      ▼ 画面が小さい場合や縦長の場合にも対応したいときは、
-      メディアクエリでフォントサイズやボタンサイズを調整するとよい
-    */
-    @media screen and (max-width: 600px) {
-      #skip-button {
-        padding: 8px 16px;
-        font-size: 14px;
-      }
     }
   </style>
 </head>
@@ -60,8 +52,7 @@
     autoplay 
     muted 
     playsinline
-  >
-  </video>
+  ></video>
   
   <button id="skip-button">Skip</button>
 
